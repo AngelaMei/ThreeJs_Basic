@@ -15,23 +15,45 @@ const image = new Image()
 // }
 // image.src = '/textures/door/color.jpg'
 
-// 2. TextureLoader
-const textureLoader = new THREE.TextureLoader()
-const texture = textureLoader.load(
-    '/textures/door/color.jpg',
-    () => {
-        console.log('load'); // when it suceess load
-    },
-    () => {
-        console.log('progress'); // don't know the usage
-    },
-    () => {
-        console.log('error'); // when fail to load
-    }
-)
+// // 2. TextureLoader
+// // 3. Loading manager: mutualize the all the loadings
+const loadingManager = new THREE.LoadingManager()
+loadingManager.onStart = () => {
+    console.log('onStart');
+}
+loadingManager.onLoad = () => {
+    console.log('onLoad');
+}
+loadingManager.onProgress = () => {
+    console.log('onProgress');
+}
+loadingManager.onError = () => {
+    console.log('onError');
+}
 
-// 3. Loading manager: mutualize the all the loadings
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const colortexture = textureLoader.load('/textures/minecraft.png')
+const alphatexture = textureLoader.load('/textures/door/alpha.jpg')
+const heighttexture = textureLoader.load('/textures/door/height.jpg')
+const normaltexture = textureLoader.load('/textures/door/normal.jpg')
+const ambientOcclusiontexture = textureLoader.load('/textures/door/ambientOcclusion.jpg')
+const metalnesstexture = textureLoader.load('/textures/door/metalness.jpg')
+const roughnesstexture = textureLoader.load('/textures/door/roughness.jpg')
 
+// colortexture.repeat.x = 2
+// colortexture.repeat.y = 3
+// colortexture.wrapS = THREE.MirroredRepeatWrapping
+// colortexture.wrapT = THREE.RepeatWrapping
+// colortexture.offset.x = 0.5
+// colortexture.offset.y = 0.5
+
+// colortexture.rotation = Math.PI / 4 
+// colortexture.center.x = 0.25
+// colortexture.center.y = 0.25
+
+// colortexture.generateMipmaps = false
+// colortexture.minFilter = THREE.NearestFilter
+colortexture.magFilter = THREE.NearestFilter
 
 THREE.ColorManagement.enabled = false
 
@@ -48,8 +70,9 @@ const scene = new THREE.Scene()
  * Object
  */
 const geometry = new THREE.BoxGeometry(1, 1, 1)
+console.log(geometry.attributes);
 const material = new THREE.MeshBasicMaterial({ 
-    map: texture
+    map: colortexture
 })
 
 const mesh = new THREE.Mesh(geometry, material)
