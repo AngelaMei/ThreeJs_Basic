@@ -40,7 +40,8 @@ fontLoader.load(
         // Way 2: center function
         textGeometry.center()
 
-        const Material = new THREE.MeshMatcapMaterial({ matcap: matcapsTextures})
+        // const Material = new THREE.MeshMatcapMaterial({ matcap: matcapsTextures})
+        const Material = new THREE.MeshNormalMaterial()
         const text = new THREE.Mesh(textGeometry, Material)
         scene.add(text)
 
@@ -72,7 +73,7 @@ fontLoader.load(
  * Base
  */
 // Debug
-const gui = new dat.GUI()
+// const gui = new dat.GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
