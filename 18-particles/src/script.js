@@ -20,7 +20,7 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const particleColorTexture = textureLoader.load('/textures/particles/2.png')
+const particleColorTexture = textureLoader.load('/textures/particles/4.png')
 
 /**
  * Particles
@@ -32,7 +32,7 @@ const particleColorTexture = textureLoader.load('/textures/particles/2.png')
 
 // Points Marterial
 const particleMaterial = new THREE.PointsMaterial({
-    size: 0.1,
+    size: 0.2,
     // color: 'pink',
     sizeAttenuation: true,
     alphaMap: particleColorTexture,
