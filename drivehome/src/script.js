@@ -4,6 +4,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import GUI from 'lil-gui'
 
+import { getPosition } from './position.js'
+
 /**
  * Base
  */
@@ -129,8 +131,9 @@ const tick = () =>
 
     // Upadte Car
     if (carAnimate !== null){
-        const positionX = Math.pow(2,elapsedTime) * Math.cos(elapsedTime)
-        carAnimate.scene.position.set(positionX, 0, 0)
+        // const positionX = Math.pow(2,elapsedTime) * Math.cos(elapsedTime)
+        const position = getPosition(elapsedTime);
+        carAnimate.scene.position.set(position.x, 0, position.y)
     }
 
     // Update controls
