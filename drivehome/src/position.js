@@ -5,16 +5,16 @@ const SHAPE = {
 };
 
 const tracks = [
-  { shape: SHAPE.STRAIGHT, size: 20 },
-  { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  { shape: SHAPE.STRAIGHT, size: 30 },
-  { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  { shape: SHAPE.STRAIGHT, size: 10 },
-  { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  { shape: SHAPE.STRAIGHT, size: 10 },
-  { shape: SHAPE.LEFT_CURVE, size: 10 },
-  { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  { shape: SHAPE.RIGHT_CURVE, size: 10 },
+  // { shape: SHAPE.STRAIGHT, size: 30 },
+  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
+  // { shape: SHAPE.STRAIGHT, size: 30 },
+  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
+  // { shape: SHAPE.STRAIGHT, size: 10 },
+  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
+  // { shape: SHAPE.STRAIGHT, size: 10 },
+  // { shape: SHAPE.LEFT_CURVE, size: 10 },
+  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
+  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
 ];
 
 export const getPosition = (elapsedTime) => {
@@ -30,7 +30,7 @@ export const getPosition = (elapsedTime) => {
   }
 
   elapsedTime = elapsedTime - Math.floor(elapsedTime / total_time) * total_time;
-  console.log(elapsedTime, total_time);
+  // console.log(elapsedTime, total_time);
 
   let position = {
     x: 0,
@@ -57,8 +57,8 @@ export const getPosition = (elapsedTime) => {
       const timeLeft = elapsedTime - timePassed;
 
       if (track.shape == SHAPE.STRAIGHT) {
-        position.x += direction.x * speed * timeLeft;
-        position.y += direction.y * speed * timeLeft;
+        position.x += - direction.x * speed * timeLeft;
+        position.y += - direction.y * speed * timeLeft;
       } else if (track.shape == SHAPE.RIGHT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
 
