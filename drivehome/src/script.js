@@ -6,6 +6,7 @@ import TWEEN from '@tweenjs/tween.js'
 import GUI from 'lil-gui'
 
 import { getPosition } from './position.js'
+import TrackManager from './track.js'
 
 /**
  * Base
@@ -63,58 +64,17 @@ const createTrees = () => {
     )
 }
 
-createTrees() 
-createTrees() 
+createTrees()
+createTrees()
 
+const trackManager = new TrackManager(scene);
 
-/**
- * Road
- */
-// Straight Road length = 20
-const createRoad = (x, z, rotate) => {
-    let road = null
-    gltfLoader.load(
-        '/models/roadStraight.glb',
-        (gltf) =>
-        {
-            road = gltf
-            road.scene.scale.set(10, 5, 5)
-            road.scene.position.set(x, 0.1, z)
-            road.scene.rotateY(rotate)
-            scene.add(road.scene)
-        }
-    )
-}
-
-
-const createCurve = (x, z, rotate) => {
-    let curve = null
-    gltfLoader.load(
-        '/models/roadCurve2.glb',
-        (gltf) =>
-        {
-            curve = gltf
-            curve.scene.scale.set(5, 5, 5)
-            curve.scene.position.set(x, 0.1, z)
-            curve.scene.rotateY(rotate)
-            scene.add(curve.scene)
-            console.log(gltf);
-        }
-    )
-}
-
-createRoad(0, 0, 0)
-createRoad(-20, 0, 0)
-createCurve(-30, 0, Math.PI)
-createCurve(-45, 15, Math.PI * -0.5)
-createRoad(-20, 30, 0)
-createRoad(0, 30, 0)
-
-// createRoad(5, -10, Math.PI * 0.5)
-// createCurve(0, 5, 0)
-// createCurve(30, 5, Math.PI)
-
-
+// trackManager.createRoad(0, 0, 0)
+// trackManager.createRoad(-20, 0, 0)
+// trackManager.createCurve(-40, 0, Math.PI)
+// trackManager.createCurve(-55, 15, Math.PI * -0.5)
+// trackManager.createRoad(-20, 30, 0)
+// trackManager.createRoad(0, 30, 0)
 
 /**
  * Textures

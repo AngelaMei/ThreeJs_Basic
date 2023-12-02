@@ -18,9 +18,12 @@ body
     outline: none;
 }
 
+.control_panel {
+    position: fixed;
+    z-index: 10;
+}
+
 .button
 {
     display: flex;
-    position: fixed;
-    z-index: 100;
 }
