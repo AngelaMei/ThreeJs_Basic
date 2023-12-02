@@ -6,37 +6,37 @@ import * as CANNON from 'cannon-es'
 /**
  * Debug
  */
-const gui = new GUI()
-const debugObject = {}
+const gui = new GUI();
+const debugObject = {};
 debugObject.createSphere = () =>{
 
-    createSphere(Math.random()* 0.5, {x: (Math.random() - 0.5) * 3, y: 3, z: (Math.random() - 0.5) * 3})
+    createSphere(Math.random()* 0.5, {x: (Math.random() - 0.5) * 3, y: 3, z: (Math.random() - 0.5) * 3});
 }
 debugObject.createBox = () =>{
-    createBox(Math.random(), Math.random(), Math.random(), {x: (Math.random() - 0.5) * 3, y: 3, z: (Math.random() - 0.5) * 3})
+    createBox(Math.random(), Math.random(), Math.random(), {x: (Math.random() - 0.5) * 3, y: 3, z: (Math.random() - 0.5) * 3});
 }
 debugObject.reset = () =>{
     for( const object of objectsToUpdate){
-        world.removeBody(object.body)
-        object.body.removeEventListener('collide', playHitSound)
+        world.removeBody(object.body);
+        object.body.removeEventListener('collide', playHitSound);
 
-        scene.remove(object.mesh)
+        scene.remove(object.mesh);
     }
-    objectsToUpdate.splice(0, objectsToUpdate.length)
+    objectsToUpdate.splice(0, objectsToUpdate.length);
 }
-gui.add(debugObject, 'createSphere')
-gui.add(debugObject, 'createBox')
-gui.add(debugObject, 'reset')
+gui.add(debugObject, 'createSphere');
+gui.add(debugObject, 'createBox');
+gui.add(debugObject, 'reset');
 
 
 /**
  * Base
  */
 // Canvas
-const canvas = document.querySelector('canvas.webgl')
+const canvas = document.querySelector('canvas.webgl');
 
 // Scene
-const scene = new THREE.Scene()
+const scene = new THREE.Scene();
 
 /**
  * Sound
