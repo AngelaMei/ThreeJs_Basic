@@ -31,14 +31,14 @@ export default class TrackManager {
   createRoad = (x, z, rotate) => {
       let road = null
       gltfLoader.load(
-          '/models/roadStraight.glb',
+          '/models/Straight.glb',
           (gltf) =>
           {
-              road = gltf
-              road.scene.scale.set(10, 5, 5)
-              road.scene.position.set(x + STRAIGHT_ROAD_LENGTH / 2, 0.1, z)
-              road.scene.rotateY(rotate)
-              this.scene.add(road.scene)
+              road = gltf;
+              road.scene.scale.set(10, 5, 5);
+              road.scene.position.set(x, 0.1, z);
+              road.scene.rotateY(rotate);
+              this.scene.add(road.scene);
           }
       )
   }
@@ -49,11 +49,11 @@ export default class TrackManager {
           '/models/roadCurve2.glb',
           (gltf) =>
           {
-              curve = gltf
-              curve.scene.scale.set(5, 5, 5)
-              curve.scene.position.set(x, 0.1, z)
-              curve.scene.rotateY(rotate)
-              this.scene.add(curve.scene)
+              curve = gltf;
+              curve.scene.scale.set(5, 5, 5);
+              curve.scene.position.set(x, 0.1, z);
+              curve.scene.rotateY(rotate);
+              this.scene.add(curve.scene);
               console.log(gltf);
           }
       )
