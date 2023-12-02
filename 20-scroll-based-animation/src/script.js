@@ -2,10 +2,11 @@ import * as THREE from 'three'
 import GUI from 'lil-gui'
 import gsap from 'gsap'
 
+
 /**
  * Debug
  */
-// const gui = new GUI()
+// 
 // gui
 //     .addColor(parameters, 'materialColor')
 //     .onChange( () =>{
