@@ -18,11 +18,11 @@ export const getPosition = (trackManager, elapsedTime) => {
 
   let position = {
     x: 0,
-    y: 0,
+    z: 0,
   };
   let direction = {
     x: 1, // -1, 0, 0
-    y: 0, // 0, -1, 1
+    z: 0, // 0, -1, 1
   };
 
   let timePassed = 0;
@@ -36,72 +36,49 @@ export const getPosition = (trackManager, elapsedTime) => {
       timeNeeded = Math.PI * track.size / (speed * 2);
     }
 
+    position = { ...track.position };
+    direction = { ...track.direction };
+
     // Check if the train is on this track
     if (timePassed + timeNeeded > elapsedTime) {
       const timeLeft = elapsedTime - timePassed;
 
       if (track.shape == SHAPE.STRAIGHT) {
-        position.x += - direction.x * speed * timeLeft;
-        position.y += - direction.y * speed * timeLeft;
+        position.x += direction.x * speed * timeLeft;
+        position.z += direction.z * speed * timeLeft;
       } else if (track.shape == SHAPE.RIGHT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
 
         position.x += direction.x * Math.sin(portion) * track.size;
-        position.y += direction.y * Math.sin(portion) * track.size;
+        position.z += direction.z * Math.sin(portion) * track.size;
 
         direction = {
-          x: direction.y,
-          y: -direction.x,
+          x: -direction.z,
+          z: direction.x,
         };
 
         position.x += direction.x * (1 - Math.cos(portion)) * track.size;
-        position.y += direction.y * (1 - Math.cos(portion)) * track.size;
+        position.z += direction.z * (1 - Math.cos(portion)) * track.size;
       } else if (track.shape == SHAPE.LEFT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
 
         position.x += direction.x * Math.sin(portion) * track.size;
-        position.y += direction.y * Math.sin(portion) * track.size;
+        position.z += direction.z * Math.sin(portion) * track.size;
 
         direction = {
-          x: -direction.y,
-          y: direction.x,
+          x: direction.z,
+          z: -direction.x,
         };
 
         position.x += direction.x * (1 - Math.cos(portion)) * track.size;
-        position.y += direction.y * (1 - Math.cos(portion)) * track.size;
+        position.z += direction.z * (1 - Math.cos(portion)) * track.size;
       }
 
       return position;
     }
 
-    // Update time and position after this track
+    // Update time after this track
     timePassed += timeNeeded;
-    if (track.shape == SHAPE.STRAIGHT) {
-      position.x += direction.x * track.size;
-      position.y += direction.y * track.size;
-    } else if (track.shape == SHAPE.RIGHT_CURVE) {
-      position.x += direction.x * track.size;
-      position.y += direction.y * track.size;
-
-      direction = {
-        x: direction.y,
-        y: -direction.x,
-      };
-
-      position.x += direction.x * track.size;
-      position.y += direction.y * track.size;
-    } else if (track.shape == SHAPE.LEFT_CURVE) {
-      position.x += direction.x * track.size;
-      position.y += direction.y * track.size;
-
-      direction = {
-        x: -direction.y,
-        y: direction.x,
-      };
-
-      position.x += direction.x * track.size;
-      position.y += direction.y * track.size;
-    }
   }
-  return { x: 0, y: 0 };
+  return { x: 0, z: 0 };
 }

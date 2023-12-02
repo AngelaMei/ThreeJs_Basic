@@ -201,7 +201,7 @@ const tick = () =>
     if (car !== null){
         // const positionX = Math.pow(2,elapsedTime) * Math.cos(elapsedTime)
         const position = getPosition(trackManager, elapsedTime);
-        car.scene.position.set(position.x, 0, position.y)
+        car.scene.position.set(position.x, 0, position.z)
     }
 
     // Update mixer

@@ -37,56 +37,51 @@ export default class TrackManager {
   }
 
   createRoad = (x, z, rotate) => {
-      let road = null
-      gltfLoader.load(
-          '/models/Straight.glb',
-          (gltf) =>
-          {
-              road = gltf;
-              road.scene.scale.set(10, 5, 5);
-              road.scene.position.set(x, 0.1, z);
-              road.scene.rotateY(rotate);
-              this.scene.add(road.scene);
-              this.tracks.push({
-                object: road,
-                position: {
-                  x: this.currentPosition.x,
-                  z: this.currentPosition.z
-                },
-                direction: {
-                  ...this.direction
-                },
-                shape: SHAPE.STRAIGHT,
-                size: STRAIGHT_ROAD_LENGTH,
-              });
-          }
-      )
+    let road = null;
+    const position = { ...this.currentPosition };
+    const direction = { ...this.direction };
+    gltfLoader.load(
+      '/models/Straight.glb',
+      (gltf) =>
+      {
+        road = gltf;
+        road.scene.scale.set(10, 5, 5);
+        road.scene.position.set(x, 0.1, z);
+        road.scene.rotateY(rotate);
+        this.scene.add(road.scene);
+        this.tracks.push({
+          object: road,
+          position,
+          direction,
+          shape: SHAPE.STRAIGHT,
+          size: STRAIGHT_ROAD_LENGTH,
+        });
+      }
+    )
   }
 
   createLeftCurve = (x, z, rotate) => {
-      let curve = null
-      gltfLoader.load(
-          '/models/roadCurve2.glb',
-          (gltf) =>
-          {
-              curve = gltf;
-              curve.scene.scale.set(5, 5, 5);
-              curve.scene.position.set(x, 0.1, z);
-              curve.scene.rotateY(rotate);
-              this.scene.add(curve.scene);
-              this.tracks.push({
-                object: curve,
-                position: {
-                  ...this.currentPosition
-                },
-                direction: {
-                  ...this.direction
-                },
-                shape: SHAPE.LEFT_CURVE,
-                size: CURVE_ROAD_LENGTH,
-              });
-          }
-      )
+    let curve = null;
+    const position = { ...this.currentPosition };
+    const direction = { ...this.direction };
+    gltfLoader.load(
+      '/models/roadCurve2.glb',
+      (gltf) =>
+      {
+        curve = gltf;
+        curve.scene.scale.set(5, 5, 5);
+        curve.scene.position.set(x, 0.1, z);
+        curve.scene.rotateY(rotate);
+        this.scene.add(curve.scene);
+        this.tracks.push({
+          object: curve,
+          position,
+          direction,
+          shape: SHAPE.LEFT_CURVE,
+          size: CURVE_ROAD_LENGTH,
+        });
+      }
+    )
   }
 
   removeLatestRoad = () => {
