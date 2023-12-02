@@ -69,13 +69,6 @@ createTrees()
 
 const trackManager = new TrackManager(scene);
 
-// trackManager.createRoad(0, 0, 0)
-// trackManager.createRoad(-20, 0, 0)
-// trackManager.createCurve(-40, 0, Math.PI)
-// trackManager.createCurve(-55, 15, Math.PI * -0.5)
-// trackManager.createRoad(-20, 30, 0)
-// trackManager.createRoad(0, 30, 0)
-
 /**
  * Textures
  */
@@ -207,7 +200,7 @@ const tick = () =>
     // Upadte Car
     if (car !== null){
         // const positionX = Math.pow(2,elapsedTime) * Math.cos(elapsedTime)
-        const position = getPosition(elapsedTime);
+        const position = getPosition(trackManager, elapsedTime);
         car.scene.position.set(position.x, 0, position.y)
     }
 

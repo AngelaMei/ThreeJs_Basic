@@ -5,6 +5,12 @@ const gltfLoader = new GLTFLoader()
 const STRAIGHT_ROAD_LENGTH = 20;
 const CURVE_ROAD_LENGTH = 15;
 
+export const SHAPE = {
+  STRAIGHT: 0,
+  RIGHT_CURVE: 1,
+  LEFT_CURVE: 2,
+}
+
 export default class TrackManager {
   constructor(scene) {
     this.tracks = [];
@@ -49,7 +55,9 @@ export default class TrackManager {
                 },
                 direction: {
                   ...this.direction
-                }
+                },
+                shape: SHAPE.STRAIGHT,
+                size: STRAIGHT_ROAD_LENGTH,
               });
           }
       )
@@ -73,7 +81,9 @@ export default class TrackManager {
                 },
                 direction: {
                   ...this.direction
-                }
+                },
+                shape: SHAPE.LEFT_CURVE,
+                size: CURVE_ROAD_LENGTH,
               });
           }
       )
@@ -110,5 +120,9 @@ export default class TrackManager {
 
     this.currentPosition.x += this.direction.x * CURVE_ROAD_LENGTH;
     this.currentPosition.z += this.direction.z * CURVE_ROAD_LENGTH;
+  }
+
+  getTracks = () => {
+    return this.tracks
   }
 }

@@ -1,24 +1,8 @@
-const SHAPE = {
-  STRAIGHT: 0,
-  RIGHT_CURVE: 1,
-  LEFT_CURVE: 2,
-};
+import { SHAPE } from './track.js'
 
-const tracks = [
-  // { shape: SHAPE.STRAIGHT, size: 30 },
-  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  // { shape: SHAPE.STRAIGHT, size: 30 },
-  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  // { shape: SHAPE.STRAIGHT, size: 10 },
-  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  // { shape: SHAPE.STRAIGHT, size: 10 },
-  // { shape: SHAPE.LEFT_CURVE, size: 10 },
-  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
-  // { shape: SHAPE.RIGHT_CURVE, size: 10 },
-];
-
-export const getPosition = (elapsedTime) => {
+export const getPosition = (trackManager, elapsedTime) => {
   const speed = 20;
+  const tracks = trackManager.getTracks()
   let total_time = 0;
   for (let i = 0; i < tracks.length; i++) {
     const track = tracks[i];
