@@ -64,11 +64,13 @@ const createTrees = () => {
 }
 
 createTrees() 
+createTrees() 
 
 
 /**
  * Road
  */
+// Straight Road length = 20
 const createRoad = (x, z, rotate) => {
     let road = null
     gltfLoader.load(
@@ -77,7 +79,7 @@ const createRoad = (x, z, rotate) => {
         {
             road = gltf
             road.scene.scale.set(10, 5, 5)
-            road.scene.position.set(x, 0.2, z)
+            road.scene.position.set(x, 0.1, z)
             road.scene.rotateY(rotate)
             scene.add(road.scene)
         }
@@ -88,23 +90,25 @@ const createRoad = (x, z, rotate) => {
 const createCurve = (x, z, rotate) => {
     let curve = null
     gltfLoader.load(
-        '/models/roadCurve.glb',
+        '/models/roadCurve2.glb',
         (gltf) =>
         {
             curve = gltf
             curve.scene.scale.set(5, 5, 5)
-            curve.scene.position.set(x, 0.2, z)
+            curve.scene.position.set(x, 0.1, z)
             curve.scene.rotateY(rotate)
             scene.add(curve.scene)
+            console.log(gltf);
         }
     )
 }
 
-createRoad(-10, 0, 0)
+createRoad(0, 0, 0)
 createRoad(-20, 0, 0)
-createCurve(-30, 0, 0)
-createCurve(-35, -25, Math.PI * -0.5)
-createRoad(-20, -30, 0)
+createCurve(-30, 0, Math.PI)
+createCurve(-45, 20, Math.PI * -0.5)
+createRoad(-15, 35, 0)
+createRoad(5, 35, 0)
 
 // createRoad(5, -10, Math.PI * 0.5)
 // createCurve(0, 5, 0)
@@ -122,6 +126,12 @@ const roadColorTexture = textureLoader.load('/textures/road/Road_001_basecolor.j
 const roadNormalTexture = textureLoader.load('/textures/road/Road_001_normal.jpg')
 const roadRoughnessTexture = textureLoader.load('/textures/road/Road_001_roughness.jpg')
 
+const grassColorTexture = textureLoader.load('/textures/grass.jpg')
+
+grassColorTexture.repeat.set(50, 50)
+grassColorTexture.wrapS = THREE.RepeatWrapping
+grassColorTexture.wrapT = THREE.RepeatWrapping
+
 roadAmbientOcclusionTexture.rotation = 2
 roadColorTexture.rotation = Math.PI
 roadNormalTexture.rotation = Math.PI
@@ -132,10 +142,11 @@ roadRoughnessTexture.rotation = Math.PI
  * Floor
  */
 const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(400, 400),
+    new THREE.CircleGeometry(200, 30),
     new THREE.MeshStandardMaterial({
         color: '#BDDDA3',
-        roughness: 1
+        roughness: 1,
+        map: grassColorTexture
     })
 )
 floor.receiveShadow = true
@@ -203,7 +214,8 @@ scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 1, 0)
+camera.position.set( 0, 20, 50 )
+controls.maxDistance = 200
 controls.enableDamping = true
 
 /**
