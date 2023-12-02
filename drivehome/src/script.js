@@ -106,9 +106,9 @@ const createCurve = (x, z, rotate) => {
 createRoad(0, 0, 0)
 createRoad(-20, 0, 0)
 createCurve(-30, 0, Math.PI)
-createCurve(-45, 20, Math.PI * -0.5)
-createRoad(-15, 35, 0)
-createRoad(5, 35, 0)
+createCurve(-45, 15, Math.PI * -0.5)
+createRoad(-20, 30, 0)
+createRoad(0, 30, 0)
 
 // createRoad(5, -10, Math.PI * 0.5)
 // createCurve(0, 5, 0)
