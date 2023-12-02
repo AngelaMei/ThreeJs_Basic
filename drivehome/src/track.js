@@ -7,6 +7,7 @@ const CURVE_ROAD_LENGTH = 15;
 
 export default class TrackManager {
   constructor(scene) {
+    this.tracks = [];
     this.scene = scene;
     this.currentPosition = {
       x: 0,
@@ -19,6 +20,7 @@ export default class TrackManager {
 
     document.getElementById("create_straight").addEventListener('click', this.createNextStraightRoad);
     document.getElementById("create_curve").addEventListener('click', this.createNextLeftCurveRoad);
+    document.getElementById("remove_latest_road").addEventListener('click', this.removeLatestRoad);
   }
 
   directionToAngle = (direction) => {
@@ -39,6 +41,16 @@ export default class TrackManager {
               road.scene.position.set(x, 0.1, z);
               road.scene.rotateY(rotate);
               this.scene.add(road.scene);
+              this.tracks.push({
+                object: road,
+                position: {
+                  x: this.currentPosition.x,
+                  z: this.currentPosition.z
+                },
+                direction: {
+                  ...this.direction
+                }
+              });
           }
       )
   }
@@ -54,9 +66,25 @@ export default class TrackManager {
               curve.scene.position.set(x, 0.1, z);
               curve.scene.rotateY(rotate);
               this.scene.add(curve.scene);
-              console.log(gltf);
+              this.tracks.push({
+                object: curve,
+                position: {
+                  ...this.currentPosition
+                },
+                direction: {
+                  ...this.direction
+                }
+              });
           }
       )
+  }
+
+  removeLatestRoad = () => {
+    console.log(this.tracks);
+    this.scene.remove(this.tracks[this.tracks.length - 1].object.scene)
+    this.tracks.pop()
+    this.currentPosition = {...this.tracks[this.tracks.length - 1].position}
+    this.direction = {...this.tracks[this.tracks.length - 1].direction}
   }
 
   createNextStraightRoad = () => {
