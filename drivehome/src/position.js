@@ -4,6 +4,8 @@ export const getPosition = (trackManager, elapsedTime) => {
   const speed = 20;
   const tracks = trackManager.getTracks()
   let total_time = 0;
+
+  // Calculate the runtime and position
   for (let i = 0; i < tracks.length; i++) {
     const track = tracks[i];
     if (track.shape == SHAPE.STRAIGHT) {
@@ -25,6 +27,7 @@ export const getPosition = (trackManager, elapsedTime) => {
     z: 0, // 0, -1, 1
   };
 
+  // Update car position
   let timePassed = 0;
   for (let i = 0; i < tracks.length; i++) {
     const track = tracks[i];
@@ -39,13 +42,14 @@ export const getPosition = (trackManager, elapsedTime) => {
     position = { ...track.position };
     direction = { ...track.direction };
 
-    // Check if the train is on this track
+    // Check if the car is on this track
     if (timePassed + timeNeeded > elapsedTime) {
       const timeLeft = elapsedTime - timePassed;
 
       if (track.shape == SHAPE.STRAIGHT) {
         position.x += direction.x * speed * timeLeft;
         position.z += direction.z * speed * timeLeft;
+
       } else if (track.shape == SHAPE.RIGHT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
 
@@ -59,6 +63,7 @@ export const getPosition = (trackManager, elapsedTime) => {
 
         position.x += direction.x * (1 - Math.cos(portion)) * track.size;
         position.z += direction.z * (1 - Math.cos(portion)) * track.size;
+
       } else if (track.shape == SHAPE.LEFT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
 

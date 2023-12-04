@@ -59,11 +59,11 @@ gltfLoader.load(
     (gltf) =>
     {
         mountain = gltf
-        gltf.scene.scale.set(5,5,5)
-        scene.add(gltf.scene)
+        mountain.scene.scale.set(5,5,5)
+        scene.add(mountain.scene)
 
         mixer = new THREE.AnimationMixer(gltf.scene)
-        for (let i = 0; i < gltf.animations.length; i++){
+        for (let i = 0; i < mountain.animations.length; i++){
             const action = mixer.clipAction(gltf.animations[i])
             action.play()
         }
@@ -195,7 +195,40 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Animate
  */
 const clock = new THREE.Clock()
+const carClock = new THREE.Clock()
 let previousTime = 0
+
+const goButton = document.getElementById("car_go")
+
+const carButtonSwitcher = () => {
+    if (goButton.textContent == "Car Go"){
+        goButton.textContent = "Car Stop"
+        console.log("Car start");
+    } else {
+        goButton.textContent = "Car Go"
+        console.log("Car stop");
+    }
+}
+
+const carAction = () => {
+    let startRun = carClock.getElapsedTime()
+    const position = getPosition(trackManager, startRun)
+    car.scene.position.set(position.x, 0, position.z)
+
+    if (goButton.textContent == "Car Stop"){
+        window.requestAnimationFrame(carAction)
+    }
+}
+
+goButton.addEventListener('click', () =>{
+    if (goButton.textContent == "Car Go"){
+        carButtonSwitcher()
+        carAction()
+    } else {
+        carButtonSwitcher()
+    }
+});
+
 
 const tick = () =>
 {
@@ -203,12 +236,14 @@ const tick = () =>
     const deltaTime = elapsedTime - previousTime
     previousTime = elapsedTime
 
-    // Upadte Car
-    if (car !== null){
-        // const positionX = Math.pow(2,elapsedTime) * Math.cos(elapsedTime)
-        const position = getPosition(trackManager, elapsedTime);
-        car.scene.position.set(position.x, 0, position.z)
-    }
+    // // Upadte Car
+    // if (car !== null){
+    //     // const positionX = Math.pow(2,elapsedTime) * Math.cos(elapsedTime)
+    //     const position = getPosition(trackManager, elapsedTime)
+    //     car.scene.position.set(position.x, 0, position.z)
+    // }
+    
+
 
     // Update mixer
     if (mixer !== null){
