@@ -110,11 +110,12 @@ export default class TrackManager {
   }
 
   removeLatestRoad = () => {
+    console.log('remove');
     console.log(this.tracks);
     this.scene.remove(this.tracks[this.tracks.length - 1].object.scene)
-    this.tracks.pop()
     this.currentPosition = {...this.tracks[this.tracks.length - 1].position}
     this.direction = {...this.tracks[this.tracks.length - 1].direction}
+    this.tracks.pop()
   }
 
   createNextStraightRoad = () => {
