@@ -246,7 +246,7 @@ const carAction = () => {
     car.scene.position.set(position.x, 0, position.z)
     car.scene.rotation.y = position.y
 
-    camera.rotateY(Math.PI)
+    controls.target.set(position.x + 15, 10, position.z +15)
     camera.position.set(position.x + 15, 10, position.z +15)
     console.log(camera)
 
