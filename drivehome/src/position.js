@@ -68,6 +68,7 @@ export const getPosition = (trackManager, elapsedTime) => {
         position.x += direction.x * Math.sin(portion) * track.size;
         position.z += direction.z * Math.sin(portion) * track.size;
         position.y -= portion;
+        console.log(portion);
 
         direction = {
           x: -direction.z,

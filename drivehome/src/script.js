@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
-import TWEEN from '@tweenjs/tween.js'
+import { gsap } from "gsap";
 import GUI from 'lil-gui'
 
 import { getPosition } from './position.js'
@@ -165,17 +165,40 @@ window.addEventListener('resize', () =>
 /**
  * Camera
  */
+
+// Button Switcher
+const buttonSwitcher = (button, startText, stopText) => {
+    if (button.textContent === startText) {
+      button.textContent = stopText;
+      console.log(`${button.id} start`); 
+    } else {
+      button.textContent = startText;
+      console.log(`${button.id} stop`);
+    }
+}
+
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500)
-camera.position.set(- 10, 30, 30)
+camera.position.set(30, 15, 30)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
-camera.position.set( 0, 20, 50 )
 controls.maxDistance = 200
 controls.maxPolarAngle = [ Math.PI * 0.5 - 0.1]
 controls.enableDamping = true
+
+// Intro Camera
+const introAnimation = () => {
+    controls.enabled = false //disable orbit controls to animate the camera
+    gsap.fromTo(camera.position, {x: 50, y: 100, z: 50}, {x: 15, y: 10, z: 15, duration: 2.5, delay: 0.8, ease: "power4.out"})
+    controls.enabled = true //enable orbit controls
+}
+
+introAnimation()
+
+// Camera Switcher
+const cameraButton = document.querySelector("#camera_change")
 
 /**
  * Renderer
@@ -190,8 +213,6 @@ renderer.setClearColor(backgroundColor)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
-
-
 /**
  * Animate
  */
@@ -199,26 +220,13 @@ const clock = new THREE.Clock()
 const carClock = new THREE.Clock()
 let previousTime = 0
 
-const goButton = document.getElementById("car_go")
-
-const carButtonSwitcher = () => {
-    if (goButton.textContent == "Car Go"){
-        goButton.textContent = "Car Stop"
-        console.log("Car start");
-    } else {
-        goButton.textContent = "Car Go"
-        console.log("Car stop");
-    }
-}
+const goButton = document.querySelector("#car_go")
 
 const carAction = () => {
     let startRun = carClock.getElapsedTime()
     const position = getPosition(trackManager, startRun)
     car.scene.position.set(position.x, 0, position.z)
     car.scene.rotation.y = position.y
-
-    // car.scene.rotation.set(0, position.rotation, 0)
-    // console.log(car.scene.rotation);
 
     if (goButton.textContent == "Car Stop"){
         window.requestAnimationFrame(carAction)
@@ -227,10 +235,10 @@ const carAction = () => {
 
 goButton.addEventListener('click', () =>{
     if (goButton.textContent == "Car Go"){
-        carButtonSwitcher()
+        buttonSwitcher(goButton, "Car Go", "Car Stop")
         carAction()
     } else {
-        carButtonSwitcher()
+        buttonSwitcher(goButton, "Car Go", "Car Stop")
     }
 });
 
@@ -254,6 +262,8 @@ const tick = () =>
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
+
+
 }
 
 tick()

@@ -25,10 +25,10 @@ export default class TrackManager {
       z: 0,
     };
 
-    document.getElementById("create_straight").addEventListener('click', this.createNextStraightRoad);
-    document.getElementById("create_L_curve").addEventListener('click', this.createNextLeftCurveRoad);
-    document.getElementById("create_R_curve").addEventListener('click', this.createNextRightCurveRoad);
-    document.getElementById("remove_latest_road").addEventListener('click', this.removeLatestRoad);
+    document.querySelector("#create_straight").addEventListener('click', this.createNextStraightRoad);
+    document.querySelector("#create_L_curve").addEventListener('click', this.createNextLeftCurveRoad);
+    document.querySelector("#create_R_curve").addEventListener('click', this.createNextRightCurveRoad);
+    document.querySelector("#remove_latest_road").addEventListener('click', this.removeLatestRoad);
   }
 
   directionToAngle = (direction) => {
