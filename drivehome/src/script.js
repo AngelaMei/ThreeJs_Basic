@@ -180,8 +180,8 @@ const buttonSwitcher = (button, startText, stopText) => {
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500)
 camera.position.set(30, 15, 30)
-const helper = new THREE.CameraHelper(camera)
-scene.add(helper)
+// const helper = new THREE.CameraHelper(camera)
+// scene.add(helper)
 scene.add(camera)
 
 // Controls
@@ -246,9 +246,21 @@ const carAction = () => {
     car.scene.position.set(position.x, 0, position.z)
     car.scene.rotation.y = position.y
 
-    controls.target.set(position.x, 5, position.z)
-    camera.position.set(position.x + 15, 10, position.z +15)
-    console.log(camera)
+    // Camera third person
+    // controls.target.set(position.x, 5, position.z)
+    // camera.position.set(position.x + 15, 10, position.z +15)
+    // console.log(camera)
+
+    // Camera first person
+    // controls.target.set(position.x, 5, position.z)
+    // camera.position.set(position.x + 5 * Math.cos(position.y), 
+    //                     5,
+    //                     position.z - 5 * Math.sin(position.y))
+
+    camera.position.set(position.x, 5, position.z)
+    controls.target.set(position.x + 5 * Math.cos(position.y), 
+                        5,
+                        position.z - 5 * Math.sin(position.y))
 
     if (goButton.textContent == "Car Stop"){
         window.requestAnimationFrame(carAction)
