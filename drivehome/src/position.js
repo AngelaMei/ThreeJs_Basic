@@ -1,5 +1,12 @@
 import { SHAPE } from './track.js'
 
+const directionToAngle = (direction) => {
+  if (direction.x == 1 && direction.z == 0) return 0;
+  else if (direction.x == 0 && direction.z == 1) return -Math.PI / 2;
+  else if (direction.x == -1 && direction.z == 0) return Math.PI;
+  else if (direction.x == 0 && direction.z == -1) return Math.PI / 2;
+}
+
 export const getPosition = (trackManager, elapsedTime) => {
   const speed = 20;
   const tracks = trackManager.getTracks()
@@ -45,6 +52,7 @@ export const getPosition = (trackManager, elapsedTime) => {
 
     position = { ...track.position };
     direction = { ...track.direction };
+    position.y = directionToAngle(direction);
 
     // Check if the car is on this track
     if (timePassed + timeNeeded > elapsedTime) {
@@ -56,11 +64,10 @@ export const getPosition = (trackManager, elapsedTime) => {
 
       } else if (track.shape == SHAPE.RIGHT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
-        let lastAngle = null;
 
         position.x += direction.x * Math.sin(portion) * track.size;
         position.z += direction.z * Math.sin(portion) * track.size;
-        position.y = - Math.PI * 0.25 * portion
+        position.y -= portion;
 
         direction = {
           x: -direction.z,
@@ -72,11 +79,10 @@ export const getPosition = (trackManager, elapsedTime) => {
 
       } else if (track.shape == SHAPE.LEFT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
-        let lastAngle = null;
 
         position.x += direction.x * Math.sin(portion) * track.size;
         position.z += direction.z * Math.sin(portion) * track.size;
-        position.y = ( - Math.PI * 0.5 * portion) - lastAngle
+        position.y += portion;
 
         direction = {
           x: direction.z,
