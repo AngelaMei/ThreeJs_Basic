@@ -9,6 +9,13 @@ import { getPosition } from './position.js'
 import TrackManager from './track.js'
 
 /**
+ * Color
+ */
+// const backgroundColor = '#F4D8DA'
+const backgroundColor = '#7AC9FB'
+
+
+/**
  * Base
  */
 // Debug
@@ -25,6 +32,8 @@ const canvas = document.querySelector('canvas.webgl')
 
 // Scene
 const scene = new THREE.Scene()
+// const fog = new THREE.Fog(backgroundColor, 0.1, 300)
+// scene.fog = fog
 
 /**
  * Models
@@ -33,7 +42,7 @@ const gltfLoader = new GLTFLoader()
 let car = null
 
 gltfLoader.load(
-    '/models/RollerCoaster.glb',
+    '/models/car.glb',
     (gltf) =>
     {
         car = gltf
@@ -42,30 +51,26 @@ gltfLoader.load(
     }
 )
 
-
+let mountain = null
 let mixer = null
 
-const createTrees = () => {
-    let tree = null
-    gltfLoader.load(
-        '/models/tree.glb',
-        (gltf) =>
-        {
-            tree = gltf
-            tree.scene.position.set(Math.random()-0.5 * 200, 0, Math.random()-0.5 * 200)
-            const scale = Math.random() * 5
-            tree.scene.scale.set(scale, scale, scale)
-            scene.add(gltf.scene)
+gltfLoader.load(
+    '/models/mountain.glb',
+    (gltf) =>
+    {
+        mountain = gltf
+        gltf.scene.scale.set(5,5,5)
+        scene.add(gltf.scene)
+        console.log(gltf)
 
-            mixer = new THREE.AnimationMixer(gltf.scene)
-            const action = mixer.clipAction(gltf.animations[0])
+        mixer = new THREE.AnimationMixer(gltf.scene)
+        for (let i = 0; i < gltf.animations.length; i++){
+            const action = mixer.clipAction(gltf.animations[i])
             action.play()
         }
-    )
-}
+    }
+)
 
-createTrees()
-createTrees()
 
 const trackManager = new TrackManager(scene);
 
@@ -95,9 +100,9 @@ roadRoughnessTexture.rotation = Math.PI
  * Floor
  */
 const floor = new THREE.Mesh(
-    new THREE.CircleGeometry(200, 30),
+    new THREE.CircleGeometry(180, 30),
     new THREE.MeshStandardMaterial({
-        color: '#BDDDA3',
+        color: '#DDE5B6',
         roughness: 1,
         map: grassColorTexture
     })
@@ -109,7 +114,7 @@ scene.add(floor)
 /**
  * Lights
  */
-const ambientLight = new THREE.AmbientLight(0xffffff, 2)
+const ambientLight = new THREE.AmbientLight(0xffffff, 3)
 scene.add(ambientLight)
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1.8)
@@ -180,8 +185,9 @@ const renderer = new THREE.WebGLRenderer({
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
-renderer.setClearColor('#C5FFFD')
+renderer.setClearColor(backgroundColor)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
 
 
 
