@@ -19,13 +19,13 @@ const backgroundColor = '#7AC9FB'
  * Base
  */
 // Debug
-const gui = new GUI()
-const debugObject = {}
-debugObject.createRoad = () =>{createRoad(100, 0, Math.random()*20)}
-debugObject.createCurve = () =>{createCurve(100, 0, Math.random()*20)}
+// const gui = new GUI()
+// const debugObject = {}
+// debugObject.createRoad = () =>{createRoad(100, 0, Math.random()*20)}
+// debugObject.createCurve = () =>{createCurve(100, 0, Math.random()*20)}
 
-gui.add(debugObject, 'createRoad')
-gui.add(debugObject, 'createCurve')
+// gui.add(debugObject, 'createRoad')
+// gui.add(debugObject, 'createCurve')
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -61,7 +61,6 @@ gltfLoader.load(
         mountain = gltf
         gltf.scene.scale.set(5,5,5)
         scene.add(gltf.scene)
-        console.log(gltf)
 
         mixer = new THREE.AnimationMixer(gltf.scene)
         for (let i = 0; i < gltf.animations.length; i++){

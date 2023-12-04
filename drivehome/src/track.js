@@ -25,7 +25,8 @@ export default class TrackManager {
     };
 
     document.getElementById("create_straight").addEventListener('click', this.createNextStraightRoad);
-    document.getElementById("create_curve").addEventListener('click', this.createNextLeftCurveRoad);
+    document.getElementById("create_L_curve").addEventListener('click', this.createNextLeftCurveRoad);
+    document.getElementById("create_R_curve").addEventListener('click', this.createNextRightCurveRoad);
     document.getElementById("remove_latest_road").addEventListener('click', this.removeLatestRoad);
   }
 
@@ -84,6 +85,30 @@ export default class TrackManager {
     )
   }
 
+  createRightCurve = (x, z, rotate) => {
+    let curve = null;
+    const position = { ...this.currentPosition };
+    const direction = { ...this.direction };
+    gltfLoader.load(
+      '/models/RCurve.glb',
+      (gltf) =>
+      {
+        curve = gltf;
+        curve.scene.scale.set(5, 5, 5);
+        curve.scene.position.set(x, 0.1, z);
+        curve.scene.rotateY(rotate);
+        this.scene.add(curve.scene);
+        this.tracks.push({
+          object: curve,
+          position,
+          direction,
+          shape: SHAPE.RIGHT_CURVE,
+          size: CURVE_ROAD_LENGTH,
+        });
+      }
+    )
+  }
+
   removeLatestRoad = () => {
     console.log(this.tracks);
     this.scene.remove(this.tracks[this.tracks.length - 1].object.scene)
@@ -111,6 +136,22 @@ export default class TrackManager {
     this.direction = {
       x: this.direction.z,
       z: -this.direction.x,
+    };
+
+    this.currentPosition.x += this.direction.x * CURVE_ROAD_LENGTH;
+    this.currentPosition.z += this.direction.z * CURVE_ROAD_LENGTH;
+  }
+
+  createNextRightCurveRoad = () => {
+    this.createRightCurve(this.currentPosition.x, this.currentPosition.z,
+        this.directionToAngle(this.direction));
+
+    this.currentPosition.x += this.direction.x * CURVE_ROAD_LENGTH;
+    this.currentPosition.z += this.direction.z * CURVE_ROAD_LENGTH;
+
+    this.direction = {
+      x: -this.direction.z,
+      z: this.direction.x,
     };
 
     this.currentPosition.x += this.direction.x * CURVE_ROAD_LENGTH;
