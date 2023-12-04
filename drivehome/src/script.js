@@ -180,6 +180,8 @@ const buttonSwitcher = (button, startText, stopText) => {
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500)
 camera.position.set(30, 15, 30)
+const helper = new THREE.CameraHelper(camera)
+scene.add(helper)
 scene.add(camera)
 
 // Controls
@@ -195,10 +197,26 @@ const introAnimation = () => {
     controls.enabled = true //enable orbit controls
 }
 
-introAnimation()
+//introAnimation()
 
-// Camera Switcher
-const cameraButton = document.querySelector("#camera_change")
+// // Camera Switcher
+// const cameraButton = document.querySelector("#camera_change")
+// const cameraSwitcher = () => {
+//     if (cameraButton.textContent == "Scene Camera"){
+//         camera.position = car.scene.position
+//         window.requestAnimationFrame(cameraSwitcher)
+//     }
+// }
+
+// cameraButton.addEventListener('click', () =>{
+//     if (cameraButton.textContent == "Scene Camera"){
+//         buttonSwitcher(cameraButton, "Third Person Camera", "Scene Camera")
+//         cameraSwitcher()
+//     } else {
+//         buttonSwitcher(cameraButton, "Third Person Camera", "Scene Camera")
+//     }
+// });
+
 
 /**
  * Renderer
@@ -227,6 +245,10 @@ const carAction = () => {
     const position = getPosition(trackManager, startRun)
     car.scene.position.set(position.x, 0, position.z)
     car.scene.rotation.y = position.y
+
+    camera.rotateY(Math.PI)
+    camera.position.set(position.x + 15, 10, position.z +15)
+    console.log(camera)
 
     if (goButton.textContent == "Car Stop"){
         window.requestAnimationFrame(carAction)
