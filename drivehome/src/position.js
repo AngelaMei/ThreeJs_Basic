@@ -5,7 +5,7 @@ export const getPosition = (trackManager, elapsedTime) => {
   const tracks = trackManager.getTracks()
   let total_time = 0;
 
-  // Calculate the runtime and position
+  // Calculate the runtime
   for (let i = 0; i < tracks.length; i++) {
     const track = tracks[i];
     if (track.shape == SHAPE.STRAIGHT) {
@@ -16,12 +16,15 @@ export const getPosition = (trackManager, elapsedTime) => {
   }
 
   elapsedTime = elapsedTime - Math.floor(elapsedTime / total_time) * total_time;
+
   // console.log(elapsedTime, total_time);
 
   let position = {
     x: 0,
     z: 0,
+    y: 0,
   };
+
   let direction = {
     x: 1, // -1, 0, 0
     z: 0, // 0, -1, 1
@@ -29,6 +32,7 @@ export const getPosition = (trackManager, elapsedTime) => {
 
   // Update car position
   let timePassed = 0;
+
   for (let i = 0; i < tracks.length; i++) {
     const track = tracks[i];
     // Compute time needed to pass this track
@@ -52,9 +56,11 @@ export const getPosition = (trackManager, elapsedTime) => {
 
       } else if (track.shape == SHAPE.RIGHT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
+        let lastAngle = null;
 
         position.x += direction.x * Math.sin(portion) * track.size;
         position.z += direction.z * Math.sin(portion) * track.size;
+        position.y = - Math.PI * 0.25 * portion
 
         direction = {
           x: -direction.z,
@@ -66,9 +72,11 @@ export const getPosition = (trackManager, elapsedTime) => {
 
       } else if (track.shape == SHAPE.LEFT_CURVE) {
         const portion = timeLeft / timeNeeded * (Math.PI / 2);
+        let lastAngle = null;
 
         position.x += direction.x * Math.sin(portion) * track.size;
         position.z += direction.z * Math.sin(portion) * track.size;
+        position.y = ( - Math.PI * 0.5 * portion) - lastAngle
 
         direction = {
           x: direction.z,
@@ -85,5 +93,5 @@ export const getPosition = (trackManager, elapsedTime) => {
     // Update time after this track
     timePassed += timeNeeded;
   }
-  return { x: 0, z: 0 };
+  return { x: 0, z: 0, y: 0};
 }

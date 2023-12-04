@@ -18,6 +18,7 @@ export default class TrackManager {
     this.currentPosition = {
       x: 0,
       z: 0,
+      y: 0,
     };
     this.direction = {
       x: 1,
@@ -124,7 +125,7 @@ export default class TrackManager {
     this.currentPosition.x += this.direction.x * STRAIGHT_ROAD_LENGTH;
     this.currentPosition.z += this.direction.z * STRAIGHT_ROAD_LENGTH;
 
-    console.log(this.currentPosition);
+    // console.log(this.currentPosition);
   }
 
   createNextLeftCurveRoad = () => {

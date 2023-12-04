@@ -47,7 +47,8 @@ gltfLoader.load(
     {
         car = gltf
         scene.add(gltf.scene)
-        car.rotation
+        // car.scene.rotateY(Math.PI* -0.5)
+        // console.log(car);
     }
 )
 
@@ -214,6 +215,10 @@ const carAction = () => {
     let startRun = carClock.getElapsedTime()
     const position = getPosition(trackManager, startRun)
     car.scene.position.set(position.x, 0, position.z)
+    car.scene.rotation.y = position.y
+
+    // car.scene.rotation.set(0, position.rotation, 0)
+    // console.log(car.scene.rotation);
 
     if (goButton.textContent == "Car Stop"){
         window.requestAnimationFrame(carAction)
@@ -235,15 +240,6 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - previousTime
     previousTime = elapsedTime
-
-    // // Upadte Car
-    // if (car !== null){
-    //     // const positionX = Math.pow(2,elapsedTime) * Math.cos(elapsedTime)
-    //     const position = getPosition(trackManager, elapsedTime)
-    //     car.scene.position.set(position.x, 0, position.z)
-    // }
-    
-
 
     // Update mixer
     if (mixer !== null){
