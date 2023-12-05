@@ -242,6 +242,7 @@ const carStartSound = new Audio('sound/carHorn.m4a');
 goButton.addEventListener('click', () =>{
     if (carRun === false){
         carRun = true
+        cameraChoice = cameraOptions.carSide
         goButton.src="icon/Road_7.png";
         carStartSound.play();
 
