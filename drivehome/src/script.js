@@ -200,10 +200,10 @@ const cameraSwitch = (position) => {
         controls.target.set(position.x + 5 * Math.cos(position.y), 5, position.z - 5 * Math.sin(position.y))
     } else if (cameraChoice == 3){
         controls.target.set(position.x, 5, position.z)
-        camera.position.set(position.x + 5 * Math.cos(position.y), 
+        camera.position.set(position.x - 10 * Math.cos(position.y), 
                         5,
-                        position.z - 5 * Math.sin(position.y))
-    } else{
+                        position.z + 10 * Math.sin(position.y))
+    } else if (cameraChoice == 0) {
         controls.target.set(0, 0, 0)
     }
 }
@@ -255,6 +255,7 @@ goButton.addEventListener('click', () =>{
     } else {
         carRun = false
         cameraChoice = cameraOptions.wholeView
+        // camera.position.set(30, 15, 30)
         goButton.src="icon/Road_4.png";
         
         cameraButtons.forEach(button => {
@@ -304,11 +305,16 @@ const tick = () =>
     // Car Animate
     let startRun = carClock.getElapsedTime()
     const position = getPosition(trackManager, startRun)
+    let stopTime = 0
+
     if (car !== null && carRun === true){
+        carClock.running = true
+        carClock.startTime = stopTime
         car.scene.position.set(position.x, 0, position.z)
         car.scene.rotation.y = position.y
     } else {
-        // carClock.stop()
+        stopTime = carClock.elapsedTime
+        carClock.running = false
     }
 
     cameraSwitch(position)
