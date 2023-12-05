@@ -29,20 +29,18 @@ body
 .button
 {
     display: flex;
-    background-color: #d5f5ff;
-    border-color: #4f99ee;
+    background-color: rgb(111, 201, 250);
     border-width: 0px;
     border-radius: 9999px;
     padding: 0px;
     margin: 15px;
     font-size: 18px;
-    box-shadow: 5px 5px 10px #4f99ee;
+    box-shadow: 5px 5px 10px #888888;
+    cursor: pointer;
 }
 
-.button:hover
-{
-    background-color: rgb(144, 216, 255);
-    border-color: #4f99ee;
+.button:hover{
+    background-color: rgb(142, 221, 255);
     transform: rotate(12deg);
 }
 
@@ -51,6 +49,39 @@ body
     transform: translateY(4px);
 }
 
-img{
+.button img{
     width: 90px;
+}
+
+.switcher img{
+    width: 90px;
+}
+
+.switcher{
+    display: flex;
+    background-color: rgb(191, 230, 251);
+    border-radius: 50px;
+    padding: 0px;
+    margin: 15px;
+    font-size: 18px;
+    box-shadow: 5px 5px 10px #888888;
+}
+
+.switch {
+    background-color: rgb(191, 230, 251);
+    display: flex;
+    border: 0px solid transparent;
+    border-radius: 55px;
+    cursor: pointer;
+    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+.switch.active {
+    background-color: rgb(111, 201, 250);
+    box-shadow: 0 8px 8px 0 #888888;
+    z-index: 20;
+}
+
+.switch.inactive {
+    display: none;
 }

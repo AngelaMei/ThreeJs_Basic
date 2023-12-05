@@ -168,8 +168,6 @@ window.addEventListener('resize', () =>
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500)
 camera.position.set(30, 15, 30)
-// const helper = new THREE.CameraHelper(camera)
-// scene.add(helper)
 scene.add(camera)
 
 // Controls
@@ -177,6 +175,33 @@ const controls = new OrbitControls(camera, canvas)
 controls.maxDistance = 200
 controls.maxPolarAngle = [ Math.PI * 0.5 - 0.1]
 controls.enableDamping = true
+
+// cameraSwitcher
+const cameraOptions = {
+    wholeView: 0,
+    carSide: 1,
+    carFront: 2,
+    carBack:3,
+}
+
+let cameraChoice = cameraOptions.wholeView
+
+const cameraSwitch = (position) => {
+    if (cameraChoice == 1){
+        controls.target.set(position.x, 5, position.z)
+        camera.position.set(position.x + 15, 10, position.z +15)
+    } else if (cameraChoice == 2){
+        camera.position.set(position.x, 5, position.z)
+        controls.target.set(position.x + 5 * Math.cos(position.y), 5, position.z - 5 * Math.sin(position.y))
+    } else if (cameraChoice == 3){
+        controls.target.set(position.x, 5, position.z)
+        camera.position.set(position.x + 5 * Math.cos(position.y), 
+                        5,
+                        position.z - 5 * Math.sin(position.y))
+    } else{
+        controls.target.set(0, 0, 0)
+    }
+}
 
 // Intro Camera
 const introAnimation = () => {
@@ -187,28 +212,9 @@ const introAnimation = () => {
 
 //introAnimation()
 
-// // Camera Switcher
-// const cameraButton = document.querySelector("#camera_change")
-// const cameraSwitcher = () => {
-//     if (cameraButton.textContent == "Scene Camera"){
-//         camera.position = car.scene.position
-//         window.requestAnimationFrame(cameraSwitcher)
-//     }
-// }
-
-// cameraButton.addEventListener('click', () =>{
-//     if (cameraButton.textContent == "Scene Camera"){
-//         buttonSwitcher(cameraButton, "Third Person Camera", "Scene Camera")
-//         cameraSwitcher()
-//     } else {
-//         buttonSwitcher(cameraButton, "Third Person Camera", "Scene Camera")
-//     }
-// });
-
-
 /**
  * Renderer
- */
+*/
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
@@ -220,51 +226,53 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 
 /**
- * Animate
- */
-const clock = new THREE.Clock()
-const carClock = new THREE.Clock()
-let previousTime = 0
-
-let carRun = false;
-const goButton = document.querySelector("#car_go")
-
-const carAction = () => {
-    let startRun = carClock.getElapsedTime()
-    const position = getPosition(trackManager, startRun)
-    car.scene.position.set(position.x, 0, position.z)
-    car.scene.rotation.y = position.y
-
-    // Camera third person
-    // controls.target.set(position.x, 5, position.z)
-    // camera.position.set(position.x + 15, 10, position.z +15)
-    // console.log(camera)
-
-    // Camera first person
-    // controls.target.set(position.x, 5, position.z)
-    // camera.position.set(position.x + 5 * Math.cos(position.y), 
-    //                     5,
-    //                     position.z - 5 * Math.sin(position.y))
-
-    camera.position.set(position.x, 5, position.z)
-    controls.target.set(position.x + 5 * Math.cos(position.y), 5, position.z - 5 * Math.sin(position.y))
-
-    if (carRun === true){
-        window.requestAnimationFrame(carAction)
-    }
-}
+ * Button
+*/
+const cameraSwitcher = document.querySelector('.switcher'); 
+const cameraButtons = cameraSwitcher.querySelectorAll('.switch');
+const goButton = document.querySelector("#car_go");
+const carStartSound = new Audio('sound/carHorn.m4a');
 
 goButton.addEventListener('click', () =>{
     if (carRun === false){
-        console.log('car start');
         carRun = true
         goButton.src="icon/Road_7.png";
-        carAction();
+        carStartSound.play();
+        cameraButtons.forEach(button => {
+            button.classList.remove('inactive');
+        });
+        
     } else {
         carRun = false
+        cameraChoice = cameraOptions.wholeView
         goButton.src="icon/Road_4.png";
+        cameraButtons.forEach(button => {
+            button.classList.add('inactive');
+        });
     }
 });
+
+
+cameraSwitcher.addEventListener('click', (event) => {
+    const clickedButton = event.target.parentElement;
+    cameraButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+    clickedButton.classList.add('active');
+    cameraChoice = event.target.parentElement.id.substr(-1);
+});
+
+
+
+/**
+ * Other Animate
+ */
+
+const clock = new THREE.Clock()
+let previousTime = 0
+
+const carClock = new THREE.Clock()
+let carRun = false;
 
 const tick = () =>
 {
@@ -277,6 +285,17 @@ const tick = () =>
         mixer.update(deltaTime*1.5)
     }
 
+    // Car
+    let startRun = carClock.getElapsedTime()
+    const position = getPosition(trackManager, startRun)
+    if (car !== null && carRun === true){
+        car.scene.position.set(position.x, 0, position.z)
+        car.scene.rotation.y = position.y
+    }
+
+    cameraSwitch(position)
+
+
     // Update controls
     controls.update()
 
@@ -285,8 +304,6 @@ const tick = () =>
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
-
-
 }
 
 tick()
