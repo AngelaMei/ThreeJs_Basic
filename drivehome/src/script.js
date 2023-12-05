@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { gsap } from "gsap";
 import GUI from 'lil-gui'
 
@@ -18,7 +17,7 @@ const backgroundColor = '#7AC9FB'
  * Sound
  */
 const backgroundMusic = new Audio('sound/background.mp3')
-backgroundMusic.play()
+// backgroundMusic.play()
 
 
 /**
@@ -236,6 +235,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 */
 const cameraSwitcher = document.querySelector('.switcher'); 
 const cameraButtons = cameraSwitcher.querySelectorAll('.switch');
+const roadButtons = document.querySelectorAll('.roadButton');
 const goButton = document.querySelector("#car_go");
 const carStartSound = new Audio('sound/carHorn.m4a');
 
@@ -244,17 +244,27 @@ goButton.addEventListener('click', () =>{
         carRun = true
         goButton.src="icon/Road_7.png";
         carStartSound.play();
+
         cameraButtons.forEach(button => {
             button.classList.remove('inactive');
+        });
+        roadButtons.forEach(button => {
+            button.classList.add('inactive');
         });
         
     } else {
         carRun = false
         cameraChoice = cameraOptions.wholeView
         goButton.src="icon/Road_4.png";
+        
         cameraButtons.forEach(button => {
             button.classList.add('inactive');
         });
+
+        roadButtons.forEach(button => {
+            button.classList.remove('inactive');
+        });
+        console.log(roadButtons);
     }
 });
 
@@ -291,12 +301,14 @@ const tick = () =>
         mixer.update(deltaTime*1.5)
     }
 
-    // Car
+    // Car Animate
     let startRun = carClock.getElapsedTime()
     const position = getPosition(trackManager, startRun)
     if (car !== null && carRun === true){
         car.scene.position.set(position.x, 0, position.z)
         car.scene.rotation.y = position.y
+    } else {
+        // carClock.stop()
     }
 
     cameraSwitch(position)
