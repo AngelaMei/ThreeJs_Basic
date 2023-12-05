@@ -319,11 +319,11 @@ const tick = () =>
         //carClock.running = true
         car.scene.position.set(position.x, 0, position.z)
         car.scene.rotation.y = position.y
+        cameraSwitch(position);
     } else {
         //carClock.running = false
     }
 
-    cameraSwitch(car ? car.scene.position : { x: 0, z: 0 });
 
 
     // Update controls
