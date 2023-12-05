@@ -229,10 +229,18 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setClearColor(backgroundColor)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-
 /**
  * Button
 */
+
+const clock = new THREE.Clock()
+let previousTime = 0
+
+const carClock = new THREE.Clock()
+let isCarAtStartPoint = true;
+let timeNotMoving = 0;
+let carRun = false;
+
 const cameraSwitcher = document.querySelector('.switcher'); 
 const cameraButtons = cameraSwitcher.querySelectorAll('.switch');
 const defaultCamera = document.querySelector('#camera_1'); 
@@ -242,8 +250,7 @@ const carStartSound = new Audio('sound/carHorn.m4a');
 
 goButton.addEventListener('click', () =>{
     if (carRun === false){
-        carRun = true
-        cameraChoice = cameraOptions.carSide
+        cameraChoice = cameraOptions.carSide;
         goButton.src="icon/Road_7.png";
         carStartSound.play();
 
@@ -253,13 +260,21 @@ goButton.addEventListener('click', () =>{
         roadButtons.forEach(button => {
             button.classList.add('inactive');
         });
-        
+
+        if (isCarAtStartPoint) {
+            isCarAtStartPoint = false;
+            carClock.start();
+        } else {
+            timeNotMoving += carClock.getDelta();
+        }
+        // Start car
+        carRun = true;
     } else {
-        carRun = false
-        cameraChoice = cameraOptions.wholeView
-        camera.position.set(40, 25, 40)
+        carRun = false;
+        // cameraChoice = cameraOptions.wholeView
+        // camera.position.set(40, 25, 40)
         goButton.src="icon/Road_4.png";
-        
+
         cameraButtons.forEach(button => {
             button.classList.add('inactive');
             button.classList.remove('active');
@@ -282,17 +297,9 @@ cameraSwitcher.addEventListener('click', (event) => {
     cameraChoice = event.target.parentElement.id.substr(-1);
 });
 
-
-
 /**
  * Other Animate
  */
-
-const clock = new THREE.Clock()
-let previousTime = 0
-
-const carClock = new THREE.Clock()
-let carRun = false;
 
 const tick = () =>
 {
@@ -306,10 +313,9 @@ const tick = () =>
     }
 
     // Car Animate
-    let startRun = carClock.getElapsedTime()
-    const position = getPosition(trackManager, startRun)
-
     if (car !== null && carRun === true){
+        const timeSinceStart = carClock.getElapsedTime() - timeNotMoving;
+        const position = getPosition(trackManager, timeSinceStart)
         //carClock.running = true
         car.scene.position.set(position.x, 0, position.z)
         car.scene.rotation.y = position.y
@@ -317,7 +323,7 @@ const tick = () =>
         //carClock.running = false
     }
 
-    cameraSwitch(position)
+    cameraSwitch(car ? car.scene.position : { x: 0, z: 0 });
 
 
     // Update controls
