@@ -7,13 +7,25 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="control_panel">
-        <button id="create_straight" class="button">add straight</button>
-        <button id="create_L_curve" class="button">add left curve</button>
-        <button id="create_R_curve" class="button">add right curve</button>
-        <button id="remove_latest_road" class="button">remove road</button>
-        <button id="car_go" class="button">Car Go</button>
-        <button id="camera_change" class="button">Third Person Camera</button>
+    <div class="control_panel">            
+        <button class="button" id="create_straight">
+            <img src="icon/Road_3.png"/>
+        </button>
+        <button class="button" id="create_L_curve">
+            <img src="icon/Road_1.png"/>
+        </button>
+        <button class="button" id="create_R_curve">
+            <img src="icon/Road_2.png"/>
+        </button>
+        <button class="button" id="remove_latest_road">
+            <img src="icon/Road_5.png"/>
+        </button>
+        <button class="button">
+            <img id="car_go" src="icon/Road_4.png"/>
+        </button>
+        <button class="button" id="camera_change">
+            <img src="icon/Road_6.png"/>
+        </button>
     </div>
     <canvas class="webgl"></canvas>
     <script type="module" src="./script.js"></script>

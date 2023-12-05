@@ -20,10 +20,37 @@ body
 
 .control_panel {
     position: fixed;
+    display: flex;
+    bottom: 0px;
+    left: 10px;
     z-index: 10;
 }
 
 .button
 {
     display: flex;
+    background-color: #d5f5ff;
+    border-color: #4f99ee;
+    border-width: 0px;
+    border-radius: 9999px;
+    padding: 0px;
+    margin: 15px;
+    font-size: 18px;
+    box-shadow: 5px 5px 10px #4f99ee;
+}
+
+.button:hover
+{
+    background-color: rgb(144, 216, 255);
+    border-color: #4f99ee;
+    transform: rotate(12deg);
+}
+
+.button:active {
+    background-color: #4f99ee;
+    transform: translateY(4px);
+}
+
+img{
+    width: 90px;
 }

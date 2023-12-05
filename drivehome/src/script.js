@@ -165,18 +165,6 @@ window.addEventListener('resize', () =>
 /**
  * Camera
  */
-
-// Button Switcher
-const buttonSwitcher = (button, startText, stopText) => {
-    if (button.textContent === startText) {
-      button.textContent = stopText;
-      console.log(`${button.id} start`); 
-    } else {
-      button.textContent = startText;
-      console.log(`${button.id} stop`);
-    }
-}
-
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 500)
 camera.position.set(30, 15, 30)
@@ -238,6 +226,7 @@ const clock = new THREE.Clock()
 const carClock = new THREE.Clock()
 let previousTime = 0
 
+let carRun = false;
 const goButton = document.querySelector("#car_go")
 
 const carAction = () => {
@@ -258,24 +247,24 @@ const carAction = () => {
     //                     position.z - 5 * Math.sin(position.y))
 
     camera.position.set(position.x, 5, position.z)
-    controls.target.set(position.x + 5 * Math.cos(position.y), 
-                        5,
-                        position.z - 5 * Math.sin(position.y))
+    controls.target.set(position.x + 5 * Math.cos(position.y), 5, position.z - 5 * Math.sin(position.y))
 
-    if (goButton.textContent == "Car Stop"){
+    if (carRun === true){
         window.requestAnimationFrame(carAction)
     }
 }
 
 goButton.addEventListener('click', () =>{
-    if (goButton.textContent == "Car Go"){
-        buttonSwitcher(goButton, "Car Go", "Car Stop")
-        carAction()
+    if (carRun === false){
+        console.log('car start');
+        carRun = true
+        goButton.src="icon/Road_7.png";
+        carAction();
     } else {
-        buttonSwitcher(goButton, "Car Go", "Car Stop")
+        carRun = false
+        goButton.src="icon/Road_4.png";
     }
 });
-
 
 const tick = () =>
 {
