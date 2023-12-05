@@ -14,6 +14,12 @@ import TrackManager from './track.js'
 // const backgroundColor = '#F4D8DA'
 const backgroundColor = '#7AC9FB'
 
+/**
+ * Sound
+ */
+const backgroundMusic = new Audio('sound/background.mp3')
+backgroundMusic.play()
+
 
 /**
  * Base
