@@ -266,7 +266,6 @@ goButton.addEventListener('click', () =>{
         roadButtons.forEach(button => {
             button.classList.remove('inactive');
         });
-        console.log(roadButtons);
     }
 });
 
@@ -306,16 +305,13 @@ const tick = () =>
     // Car Animate
     let startRun = carClock.getElapsedTime()
     const position = getPosition(trackManager, startRun)
-    let stopTime = 0
 
     if (car !== null && carRun === true){
-        carClock.running = true
-        carClock.startTime = stopTime
+        //carClock.running = true
         car.scene.position.set(position.x, 0, position.z)
         car.scene.rotation.y = position.y
     } else {
-        stopTime = carClock.elapsedTime
-        carClock.running = false
+        //carClock.running = false
     }
 
     cameraSwitch(position)
