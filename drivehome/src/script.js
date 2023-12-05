@@ -235,6 +235,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 */
 const cameraSwitcher = document.querySelector('.switcher'); 
 const cameraButtons = cameraSwitcher.querySelectorAll('.switch');
+const defaultCamera = document.querySelector('#camera_1'); 
 const roadButtons = document.querySelectorAll('.roadButton');
 const goButton = document.querySelector("#car_go");
 const carStartSound = new Audio('sound/carHorn.m4a');
@@ -256,12 +257,14 @@ goButton.addEventListener('click', () =>{
     } else {
         carRun = false
         cameraChoice = cameraOptions.wholeView
-        // camera.position.set(30, 15, 30)
+        camera.position.set(40, 25, 40)
         goButton.src="icon/Road_4.png";
         
         cameraButtons.forEach(button => {
             button.classList.add('inactive');
+            button.classList.remove('active');
         });
+        defaultCamera.classList.add('active')
 
         roadButtons.forEach(button => {
             button.classList.remove('inactive');
