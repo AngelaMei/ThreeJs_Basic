@@ -336,4 +336,9 @@ const tick = () =>
     window.requestAnimationFrame(tick)
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const loading = document.querySelector('#loading')
+    loading.classList.add('inactive')
+});
+
 tick()

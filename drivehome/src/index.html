@@ -8,38 +8,43 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="control_panel">            
-        <button class="Button roadButton" id="create_straight">
-            <img src="icon/Road_3.png"/>
-        </button>
-        <button class="Button roadButton" id="create_L_curve">
-            <img src="icon/Road_1.png"/>
-        </button>
-        <button class="Button roadButton" id="create_R_curve">
-            <img src="icon/Road_2.png"/>
-        </button>
-        <button class="Button roadButton" id="remove_latest_road">
-            <img src="icon/Road_5.png"/>
-        </button>
-        <button class="Button">
-            <img id="car_go" src="icon/Road_4.png"/>
-        </button>
-        <div class="switcher">
-            <button class="switch inactive" id="camera_0">
-                <img src="icon/Road_6.png"/>
-            </button>
-            <button class="switch active inactive" id="camera_1">
-                <img src="icon/Road_8.png"/>
-            </button>
-            <button class="switch inactive" id="camera_2">
-                <img src="icon/Road_9.png"/>
-            </button>
-            <button class="switch inactive" id="camera_3">
-                <img src="icon/Road_10.png"/>
-            </button>
-        </div>
+    <div id="loading">
+        loading...
     </div>
-    <canvas class="webgl"></canvas>
+    <div class="loaded">
+        <div class="control_panel">            
+            <button class="Button roadButton" id="create_straight">
+                <img src="icon/Road_3.png"/>
+            </button>
+            <button class="Button roadButton" id="create_L_curve">
+                <img src="icon/Road_1.png"/>
+            </button>
+            <button class="Button roadButton" id="create_R_curve">
+                <img src="icon/Road_2.png"/>
+            </button>
+            <button class="Button roadButton" id="remove_latest_road">
+                <img src="icon/Road_5.png"/>
+            </button>
+            <button class="Button">
+                <img id="car_go" src="icon/Road_4.png"/>
+            </button>
+            <div class="switcher">
+                <button class="switch inactive" id="camera_0">
+                    <img src="icon/Road_6.png"/>
+                </button>
+                <button class="switch active inactive" id="camera_1">
+                    <img src="icon/Road_8.png"/>
+                </button>
+                <button class="switch inactive" id="camera_2">
+                    <img src="icon/Road_9.png"/>
+                </button>
+                <button class="switch inactive" id="camera_3">
+                    <img src="icon/Road_10.png"/>
+                </button>
+            </div>
+        </div>
+        <canvas class="webgl"></canvas>
+    </div>
     <script type="module" src="./script.js"></script>
 </body>
 </html>
