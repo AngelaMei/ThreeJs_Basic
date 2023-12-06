@@ -109,7 +109,7 @@ h2{
 
 .welcome {
     position: fixed;
-    z-index: 10;
+    z-index: 15;
     background-color: rgba(74, 74, 74, 0.6);
     width: 100vw;
     height: 100vh;
@@ -119,7 +119,27 @@ h2{
     justify-content: center;
 }
 
+.welcome img{
+    max-width: 100%;
+}
 
+.startButton {
+    padding: 20px 50px;
+    background-color: #F5AA74;
+    border-radius: 30px;
+    border-width: 4px;
+    border-color: #EF8640;
+    cursor: pointer;
+    color: #FFE9BA;
+    font-size: 50px;
+    letter-spacing: 10px;
+    font-family: dosis;
+}
+
+.startButton:hover {
+    background-color: #EF8640;
+    transform: translateY(3px);
+}
 
 .loading img{
     animation: carmovement 1s infinite ease-in-out;
