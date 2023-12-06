@@ -10,6 +10,19 @@ body
     overflow: hidden;
 }
 
+h1{
+    font-size: 70px;
+    color:#87bdcb;
+    font-family: dosis;
+    letter-spacing: 0.5em;
+}
+
+h2{
+    color: grey;
+    font-family: dosis;
+    letter-spacing: 0.05em;
+}
+
 .webgl
 {
     position: fixed;
@@ -82,6 +95,85 @@ body
     z-index: 20;
 }
 
+.loading {
+    position: fixed;
+    z-index: 20;
+    background-color: #ffffff;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome {
+    position: fixed;
+    z-index: 10;
+    background-color: rgba(74, 74, 74, 0.6);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.loading img{
+    animation: carmovement 1s infinite ease-in-out;
+}
+
 .inactive {
     display: none;
+}
+
+#progressbar{
+    margin: 50px;
+    position: relative;
+    height: 15px;
+    width: 400px;
+    background: grey;
+    border-radius: 25px;
+}
+
+#progressfill{
+    position: absolute;
+    height: 15px;
+    width: 50%;
+    animation: progress-forward 2s 1;
+    background: #87bdcb;
+    border-radius: 15px;
+}
+
+@keyframes progress-forward {
+    0% {
+        width: 0%;
+    }
+    25% {
+        width: 50%;
+    }
+    50% {
+        width: 75%;
+    }
+    75% {
+        width: 85%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes carmovement {
+    0%{
+        transform: translateY(-10px);
+    }
+    50%{
+        transform: translateY(10px);
+    }
+    100%{
+        transform: translateY(-10px);
+    }
+    
 }

@@ -6,45 +6,56 @@
     <title>Go For A Ride</title>
     <link rel="icon" type="image/x-icon" href="icon/vehicle.png">
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="loading">
-        loading...
-    </div>
-    <div class="loaded">
-        <div class="control_panel">            
-            <button class="Button roadButton" id="create_straight">
-                <img src="icon/Road_3.png"/>
-            </button>
-            <button class="Button roadButton" id="create_L_curve">
-                <img src="icon/Road_1.png"/>
-            </button>
-            <button class="Button roadButton" id="create_R_curve">
-                <img src="icon/Road_2.png"/>
-            </button>
-            <button class="Button roadButton" id="remove_latest_road">
-                <img src="icon/Road_5.png"/>
-            </button>
-            <button class="Button">
-                <img id="car_go" src="icon/Road_4.png"/>
-            </button>
-            <div class="switcher">
-                <button class="switch inactive" id="camera_0">
-                    <img src="icon/Road_6.png"/>
-                </button>
-                <button class="switch active inactive" id="camera_1">
-                    <img src="icon/Road_8.png"/>
-                </button>
-                <button class="switch inactive" id="camera_2">
-                    <img src="icon/Road_9.png"/>
-                </button>
-                <button class="switch inactive" id="camera_3">
-                    <img src="icon/Road_10.png"/>
-                </button>
-            </div>
+    <div class="loading">
+        <h1>Go For A Ride</h1>
+        <img src="icon/vehicle.png" alt="Go For A Ride">
+        <h2>Loading...</h2>
+        <div id="progressbar">
+            <div id="progressfill"></div>
         </div>
-        <canvas class="webgl"></canvas>
     </div>
+
+    <div class="welcome">
+        <img src="icon/welcome.png" alt="Go For A Ride">
+    </div>
+
+    <div class="control_panel">            
+        <button class="Button roadButton" id="create_straight">
+            <img src="icon/Road_3.png"/>
+        </button>
+        <button class="Button roadButton" id="create_L_curve">
+            <img src="icon/Road_1.png"/>
+        </button>
+        <button class="Button roadButton" id="create_R_curve">
+            <img src="icon/Road_2.png"/>
+        </button>
+        <button class="Button roadButton" id="remove_latest_road">
+            <img src="icon/Road_5.png"/>
+        </button>
+        <button class="Button">
+            <img id="car_go" src="icon/Road_4.png"/>
+        </button>
+        <div class="switcher">
+            <button class="switch inactive" id="camera_0">
+                <img src="icon/Road_6.png"/>
+            </button>
+            <button class="switch active inactive" id="camera_1">
+                <img src="icon/Road_8.png"/>
+            </button>
+            <button class="switch inactive" id="camera_2">
+                <img src="icon/Road_9.png"/>
+            </button>
+            <button class="switch inactive" id="camera_3">
+                <img src="icon/Road_10.png"/>
+            </button>
+        </div>
+    </div>
+    <canvas class="webgl"></canvas>
     <script type="module" src="./script.js"></script>
 </body>
 </html>

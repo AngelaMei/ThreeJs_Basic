@@ -8,6 +8,29 @@ import { getPosition } from './position.js'
 import TrackManager from './track.js'
 
 /**
+ * Progress Bar
+ */
+THREE.DefaultLoadingManager.onLoad = function ( ) {
+	console.log( 'Loading Complete!');
+    setTimeout(() => {
+        // Hide loading page
+        document.querySelector('.loading').classList.add('inactive'); 
+    }, 1500);
+};
+
+THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+	console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+    const percentage = itemsLoaded / itemsTotal
+    document.querySelector('#progressfill').style.width = `${percentage}%`
+};
+
+/**
+ * Illustration Page
+ */
+
+
+
+/**
  * Color
  */
 // const backgroundColor = '#F4D8DA'
@@ -18,7 +41,6 @@ const backgroundColor = '#7AC9FB'
  */
 const backgroundMusic = new Audio('sound/background.mp3')
 // backgroundMusic.play()
-
 
 /**
  * Base
@@ -215,7 +237,7 @@ const introAnimation = () => {
     controls.enabled = true //enable orbit controls
 }
 
-//introAnimation()
+// introAnimation()
 
 /**
  * Renderer
@@ -325,7 +347,6 @@ const tick = () =>
     }
 
 
-
     // Update controls
     controls.update()
 
@@ -335,10 +356,5 @@ const tick = () =>
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const loading = document.querySelector('#loading')
-    loading.classList.add('inactive')
-});
 
 tick()
