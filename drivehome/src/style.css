@@ -10,6 +10,11 @@ body
     overflow: hidden;
 }
 
+p {
+    font-family: dosis;
+    letter-spacing: 5px;
+}
+
 h1{
     font-size: 70px;
     color:#87bdcb;
@@ -39,13 +44,25 @@ h2{
     z-index: 10;
 }
 
+.infoPanel {
+    position: fixed;
+    display: flex;
+    bottom: 0px;
+    right: 10px;
+    z-index: 10;
+}
+
 .navbar {
     position: fixed;
     display: flex;
-    top: 10px;
-    right: 20px;
+    top: 20px;
+    right: 50px;
     z-index: 10;
+    font-size: 30px;
+    font-family: dosis;
+    letter-spacing: 0.3em;
 }
+
 
 .Button
 {
@@ -131,9 +148,47 @@ h2{
     max-width: 90%;
 }
 
+.infoPage {
+    position: fixed;
+    z-index: 15;
+    background-color: rgba(74, 74, 74, 0.6);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.infoPage img{
+    max-width: 90%;
+}
+
+.Acknowledgments {
+    background-image: url('icon/Acknowledgments.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50px;
+    background-size: contain;
+    height: 70vh;
+    width: 100vw;
+    margin-bottom: 20px;
+}
+
+.Acknowledgments p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+
+}
+
+
 .startButton {
     padding: 15px 50px;
-    background-color: #F5AA74;
+    margin: 15px;
+    background-color: #EF8640;
     border-radius: 30px;
     border-width: 4px;
     border-color: #EF8640;
@@ -141,11 +196,28 @@ h2{
     color: #FFE9BA;
     font-size: 45px;
     letter-spacing: 10px;
-    font-family: dosis;
 }
 
 .startButton:hover {
-    background-color: #EF8640;
+    background-color: #F5AA74;
+    transform: translateY(3px);
+}
+
+.infoButton {
+    padding: 15px 50px;
+    margin: 0px;
+    background-color: #f77272;
+    border-radius: 30px;
+    border-width: 4px;
+    border-color: #f77272;
+    cursor: pointer;
+    color: #FFE9BA;
+    font-size: 45px;
+    letter-spacing: 10px;
+}
+
+.infoButton:hover {
+    background-color: #ed5151;
     transform: translateY(3px);
 }
 
@@ -169,7 +241,7 @@ h2{
 #progressfill{
     position: absolute;
     height: 15px;
-    width: 50%;
+    width: 100%;
     animation: progress-forward 2s 1;
     background: #87bdcb;
     border-radius: 15px;

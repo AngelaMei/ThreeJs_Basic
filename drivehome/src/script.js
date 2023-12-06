@@ -246,6 +246,26 @@ document.querySelector('.startButton').addEventListener('click', () => {
     introAnimation()
 })
 
+
+
+let infoPageOpen = false;
+document.querySelector('.infoPanel').addEventListener('click', (event) => {
+    console.log('click info');
+    if (infoPageOpen == false){
+        document.querySelector('.infoPage').classList.remove('inactive');
+        infoPageOpen = true;
+    } 
+})
+
+document.querySelector('.infoButton').addEventListener('click', (event) => {
+    console.log('click info');
+    if (infoPageOpen == true){
+        document.querySelector('.infoPage').classList.add('inactive');
+        infoPageOpen = false;
+    } 
+})
+
+
 /**
  * Renderer
 */
