@@ -25,12 +25,6 @@ THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal
 };
 
 /**
- * Illustration Page
- */
-
-
-
-/**
  * Color
  */
 // const backgroundColor = '#F4D8DA'
@@ -233,11 +227,17 @@ const cameraSwitch = (position) => {
 // Intro Camera
 const introAnimation = () => {
     controls.enabled = false //disable orbit controls to animate the camera
-    gsap.fromTo(camera.position, {x: 50, y: 100, z: 50}, {x: 15, y: 10, z: 15, duration: 2.5, delay: 0.8, ease: "power4.out"})
+    gsap.fromTo(camera.position, {x: -50, y: 100, z: 50}, {x: 15, y: 10, z: 15, duration: 2.5, ease: "power4.out"})
     controls.enabled = true //enable orbit controls
 }
 
-// introAnimation()
+/**
+ * Illustration Page
+ */
+document.querySelector('.startButton').addEventListener('click', () => {
+    document.querySelector('.welcome').classList.add('inactive')
+    introAnimation()
+})
 
 /**
  * Renderer
