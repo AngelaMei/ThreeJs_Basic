@@ -8,6 +8,12 @@ import { getPosition } from './position.js'
 import TrackManager from './track.js'
 
 /**
+ * Sound
+ */
+const backgroundMusic = new Audio('sound/background.mp3')
+backgroundMusic.loop = true
+
+/**
  * Progress Bar
  */
 THREE.DefaultLoadingManager.onLoad = function ( ) {
@@ -16,6 +22,7 @@ THREE.DefaultLoadingManager.onLoad = function ( ) {
         // Hide loading page
         document.querySelector('.loading').classList.add('inactive'); 
     }, 1500);
+    backgroundMusic.play()
 };
 
 THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
@@ -29,12 +36,6 @@ THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal
  */
 // const backgroundColor = '#F4D8DA'
 const backgroundColor = '#7AC9FB'
-
-/**
- * Sound
- */
-const backgroundMusic = new Audio('sound/background.mp3')
-// backgroundMusic.play()
 
 /**
  * Base
@@ -91,7 +92,6 @@ gltfLoader.load(
         }
     }
 )
-
 
 const trackManager = new TrackManager(scene);
 
