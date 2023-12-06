@@ -39,6 +39,14 @@ h2{
     z-index: 10;
 }
 
+.navbar {
+    position: fixed;
+    display: flex;
+    top: 10px;
+    right: 20px;
+    z-index: 10;
+}
+
 .Button
 {
     display: flex;
@@ -63,11 +71,11 @@ h2{
 }
 
 .Button img{
-    width: 90px;
+    width: 100px;
 }
 
 .switcher img{
-    width: 90px;
+    width: 100px;
 }
 
 .switcher{
@@ -124,7 +132,7 @@ h2{
 }
 
 .startButton {
-    padding: 20px 50px;
+    padding: 15px 50px;
     background-color: #F5AA74;
     border-radius: 30px;
     border-width: 4px;

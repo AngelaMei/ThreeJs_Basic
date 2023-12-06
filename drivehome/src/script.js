@@ -12,6 +12,15 @@ import TrackManager from './track.js'
  */
 const backgroundMusic = new Audio('sound/background.mp3')
 backgroundMusic.loop = true
+backgroundMusic.volume = 0.6
+
+
+document.body.addEventListener('mousedown', () => {
+    backgroundMusic.play()
+});
+
+
+
 
 /**
  * Progress Bar
@@ -22,7 +31,6 @@ THREE.DefaultLoadingManager.onLoad = function ( ) {
         // Hide loading page
         document.querySelector('.loading').classList.add('inactive'); 
     }, 1500);
-    backgroundMusic.play()
 };
 
 THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
@@ -34,7 +42,6 @@ THREE.DefaultLoadingManager.onProgress = function ( url, itemsLoaded, itemsTotal
 /**
  * Color
  */
-// const backgroundColor = '#F4D8DA'
 const backgroundColor = '#7AC9FB'
 
 /**
@@ -227,7 +234,7 @@ const cameraSwitch = (position) => {
 // Intro Camera
 const introAnimation = () => {
     controls.enabled = false //disable orbit controls to animate the camera
-    gsap.fromTo(camera.position, {x: -50, y: 100, z: 50}, {x: 15, y: 10, z: 15, duration: 2.5, ease: "power4.out"})
+    gsap.fromTo(camera.position, {x: -50, y: 200, z: 50}, {x: 15, y: 10, z: 15, duration: 4, ease: "power4.out"})
     controls.enabled = true //enable orbit controls
 }
 
