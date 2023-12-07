@@ -165,7 +165,7 @@ h2{
 }
 
 .Acknowledgments {
-    background-image: url('icon/Acknowledgments.png');
+    background-image: url('/icon/Acknowledgments.png');
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50px;
