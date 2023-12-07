@@ -88,11 +88,11 @@ h2{
 }
 
 .Button img{
-    width: 100px;
+    width: 80px;
 }
 
 .switcher img{
-    width: 100px;
+    width: 80px;
 }
 
 .switcher{
@@ -151,7 +151,7 @@ h2{
 .infoPage {
     position: fixed;
     z-index: 15;
-    background-color: rgba(74, 74, 74, 0.6);
+    background-color: rgba(74, 74, 74, 0.8);
     width: 100vw;
     height: 100vh;
     display: flex;
