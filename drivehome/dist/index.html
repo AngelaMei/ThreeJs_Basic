@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go For A Ride</title>
+    <link rel="icon" type="image/x-icon" href="icon/vehicle.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="./assets/index-ed74f22c.js"></script>
+  <link rel="stylesheet" href="./assets/index-2601dac4.css">
+</head>
+<body>
+    <div class="loading">
+        <h1>Go For A Ride</h1>
+        <img src="icon/vehicle.png" alt="Go For A Ride">
+        <h2>Loading...</h2>
+        <div id="progressbar">
+            <div id="progressfill"></div>
+        </div>
+    </div>
+
+    <div class="welcome">
+        <img src="icon/welcome.png" alt="Go For A Ride">
+        <button class="startButton">
+            <p>Start</p>
+        </button>
+    </div>
+
+    <div class="infoPage inactive">
+        <div class="Acknowledgments">
+            <p>・This Project is insprired by <a href="https://choochooworld.com/">Choo-Choo World</a>
+                <br> 
+                <br> ・Special thanks to Paul Wang
+                <br> 
+                <br> ・Special thanks to <a href="https://threejs-journey.com/">Three.js Journey</a> by Bruno Simon
+                <br> 
+                <br> ・Some Resource: 
+                <a href="https://claude.ai/">Claude.ai</a>,
+                <a href="https://codepen.io/Bizzy-Coding/pen/poOymVJ">Progress Bar Sample</a>
+            </p>
+        </div>
+        <button class="infoButton">
+            <p>Close</p>
+        </button>
+    </div>
+
+    <div class="control_panel"> 
+        <button class="Button roadButton" id="create_straight">
+            <img src="icon/Road_3.png"/>
+        </button>
+        <button class="Button roadButton" id="create_L_curve">
+            <img src="icon/Road_1.png"/>
+        </button>
+        <button class="Button roadButton" id="create_R_curve">
+            <img src="icon/Road_2.png"/>
+        </button>
+        <button class="Button roadButton" id="remove_latest_road">
+            <img src="icon/Road_5.png"/>
+        </button>
+        <button class="Button">
+            <img id="car_go" src="icon/Road_4.png"/>
+        </button>
+        <div class="switcher">
+            <button class="switch inactive" id="camera_0">
+                <img src="icon/Road_6.png"/>
+            </button>
+            <button class="switch active inactive" id="camera_1">
+                <img src="icon/Road_8.png"/>
+            </button>
+            <button class="switch inactive" id="camera_2">
+                <img src="icon/Road_9.png"/>
+            </button>
+            <button class="switch inactive" id="camera_3">
+                <img src="icon/Road_10.png"/>
+            </button>
+        </div>
+    </div>
+    <div class="infoPanel">
+        <button class="Button">
+            <img src="icon/Road_11.png"/>
+        </button>
+    </div>
+    <canvas class="webgl"></canvas>
+    
+</body>
+</html>
