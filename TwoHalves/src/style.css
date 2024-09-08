@@ -1,0 +1,183 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'TakenByVulturesDemo'; 
+    src: url('font/Taken by Vultures Demo.otf') format('opentype');
+    font-family: 'TheMunday'; 
+    src: url('font/Themundayfreeversion-Regular') format('opentype');
+}
+
+html,
+body{
+    background: #f1f1f1;
+    /* overflow: hidden; */
+}
+
+a{
+    display: flex;
+    text-decoration: none;
+}
+
+p{
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    line-height: 2rem;
+}
+
+/* Navbar */
+.nav{
+    z-index: 5;
+}
+
+.navbar{
+    margin: 18px 18px 0px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1{
+    font-family: 'TakenByVulturesDemo', sans-serif;
+    color: #000000;
+    font-size: 24px;
+    letter-spacing: 0.3em;
+    font-weight: 100;
+    margin-left: 20px;
+}
+
+.logo {
+    width: 50px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu a {
+    display: inline-block;
+    margin: 18px;
+    color: #000000;
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.menu a :hover{
+    color: #8D7600;
+}
+
+.icon{
+    margin: 12px;
+    width: 40px;
+}
+
+.divider{
+    width: 100%;
+    margin-left: 20px;
+}
+
+/* WebGL */
+.webgl
+{
+    position: fixed;
+    /* top: 0; */
+    left: 0;
+    bottom: 0;
+    outline: none;
+    z-index: 2;
+}
+
+/* Section1 */
+
+.section1
+{
+    display: flex;
+    position: relative;
+    align-items: top;
+    height: 100vh;
+    width: fit-content;
+    padding-left: 10%;
+    padding-right: 10%;
+    z-index: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+}
+
+.card h1 {
+    margin-top: 70px;
+    color: #000000;
+    font-size: 160px;
+    font-family: 'TakenByVulturesDemo', sans-serif;
+    letter-spacing: 0.2em;
+    font-weight: 100;
+    margin-left: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    justify-content: flex-start;
+}
+
+.card p{
+    margin-top: 100px;
+}
+
+section:nth-child(odd)
+{
+    justify-content: flex-end;
+    
+}
+
+/* Section2 */
+
+.section2 {
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    height: 100vh;
+    width: fit-content;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+}
+
+.section2 img {
+    width: 400px;
+    height: fit-content;
+    transform: translate(100%, -130%);
+}
+
+.card2 {
+    margin: 40px;
+}
+
+.card2 h2 {
+    font-family: 'TheMunday';
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-smooth: never;
+}
+
+.footer{
+    margin: 20px;
+    z-index: 5;
+}
+
+.footer img{
+    width: 100%;
+}
